@@ -23,7 +23,7 @@ Route::get('/add-dataset', 'HomeController@showDatasetForm');
 
 Route::get('/dataset/form-data', 'DatasetController@formData');
 
-
+Route::post('/file', 'FileController@upload');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
