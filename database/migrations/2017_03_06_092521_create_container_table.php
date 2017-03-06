@@ -13,7 +13,7 @@ class CreateContainerTable extends Migration
      */
     public function up()
     {
-        Schema::create('container', function (Blueprint $table) {
+        Schema::create('containers', function (Blueprint $table) {
             $table->increments('id');
             $table->softDeletes();
             $table->timestamps();

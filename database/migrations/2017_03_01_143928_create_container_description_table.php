@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDatasetTable extends Migration
+class CreateContainerDescriptionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreateDatasetTable extends Migration
      */
     public function up()
     {
-        Schema::create('container_description', function (Blueprint $table) {
+        Schema::create('container_descriptions', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('container_id');
             $table->integer('car_id');
             $table->integer('body_id');
             $table->integer('radio_id');
-            $table->integer('sound_system_id');
+            $table->integer('soundsystem_id');
             $table->integer('hand_id');
-            $table->integer('my_id');
             $table->integer('week');
             $table->integer('year');
-            $table->integer('amp_id');
+            $table->integer('amplifier_id');
             $table->softDeletes();
             $table->timestamps();
         });

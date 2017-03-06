@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFilesTable extends Migration
+class CreateDatasetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,12 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('datasets', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->string('client_name');
-            $table->string('name');
-            $table->string('type');
-            $table->integer('size');
-            $table->string('local_storage');
-            $table->string('cloud_storage');
-            $table->string('path');
+            $table->string('');
+            $table->integer('file_id');
+            $table->integer('sandbox_id');
+            $table->integer('event_id');
             $table->softDeletes();
             $table->timestamps();
         });
