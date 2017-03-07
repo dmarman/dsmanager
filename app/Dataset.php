@@ -22,4 +22,8 @@ class Dataset extends Model
     public function tests(){
         return $this->hasMany('App\Test');
     }
+
+    public function channels(){
+        return $this->hasMany('App\Channel');
+    }
 }
