@@ -9,6 +9,6 @@ class ContainerController extends Controller
 {
     public function containers()
     {
-        return Container::with('description.car', 'description.body', 'description.radio', 'description.soundsystem', 'description.hand', 'description.amplifier')->get();
+        return Container::with('description.car', 'description.body', 'description.radio', 'description.soundsystem', 'description.hand', 'description.amplifier', 'datasets.files')->get();
     }
 }

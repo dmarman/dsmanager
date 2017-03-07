@@ -14,4 +14,9 @@ class Container extends Model
     {
         return $this->hasOne('App\ContainerDescription');
     }
+
+    public function datasets()
+    {
+        return $this->hasMany('App\Dataset');
+    }
 }

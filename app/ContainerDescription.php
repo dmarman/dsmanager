@@ -41,4 +41,9 @@ class ContainerDescription extends Model
     {
         return $this->belongsTo('App\Amplifier');
     }
+
+    public function container()
+    {
+        return $this->belongsTo('App\Container');
+    }
 }

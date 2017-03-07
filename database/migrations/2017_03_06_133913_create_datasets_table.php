@@ -15,10 +15,8 @@ class CreateDatasetsTable extends Migration
     {
         Schema::create('datasets', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('');
-            $table->integer('file_id');
-            $table->integer('sandbox_id');
-            $table->integer('event_id');
+            $table->integer('container_id');
+            $table->string('version');
             $table->softDeletes();
             $table->timestamps();
         });
