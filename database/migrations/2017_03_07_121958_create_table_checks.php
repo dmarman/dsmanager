@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDatasetsTable extends Migration
+class CreateTableChecks extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateDatasetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('datasets', function (Blueprint $table) {
+        Schema::create('checks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('container_id');
-            $table->integer('week_release');
-            $table->integer('year_release');
-            $table->string('version');
+            $table->integer('test_id');
+            $table->integer('user_id');
+            $table->string('result');
             $table->softDeletes();
             $table->timestamps();
         });

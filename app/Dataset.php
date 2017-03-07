@@ -18,4 +18,8 @@ class Dataset extends Model
     public function files(){
         return $this->hasMany('App\File');
     }
+
+    public function tests(){
+        return $this->hasMany('App\Test');
+    }
 }
