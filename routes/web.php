@@ -19,6 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/container/descriptions', 'ContainerDescriptionController@containerDescriptions');
+Route::get('/container/descriptions', 'ContainerDescriptionController@descriptions');
 
 Route::get('/containers', 'ContainerController@containers');
