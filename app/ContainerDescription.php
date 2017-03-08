@@ -9,7 +9,8 @@ class ContainerDescription extends Model
     protected $hidden = [
         'car_id', 'body_id', 'radio_id',
         'soundsystem_id', 'hand_id', 'deleted_at',
-        'amplifier_id', 'container_id'
+        'amplifier_id', 'container_id', 'created_at',
+        'updated_at'
     ];
 
     public function car()

@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Filter extends Model
+class Delay extends Model
 {
     protected $hidden = [
-        'channel_id', 'updated_at', 'deleted_at'
+        'channel_id', 'deleted_at'
     ];
 
     public function channel() {

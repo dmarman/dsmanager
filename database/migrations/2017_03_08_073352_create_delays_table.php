@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableChecks extends Migration
+class CreateDelaysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateTableChecks extends Migration
      */
     public function up()
     {
-        Schema::create('checks', function (Blueprint $table) {
+        Schema::create('delays', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('test_id');
-            $table->integer('user_id');
-            $table->string('result');
-            $table->string('comment');
+            $table->integer('channel_id');
+            $table->decimal('delay', 2, 2);
             $table->softDeletes();
             $table->timestamps();
         });
