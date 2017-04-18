@@ -7,13 +7,10 @@
             <thead>
             <tr>
                 <th>#ID</th>
-                <th>Car</th>
-                <th>Body</th>
-                <th>Radio</th>
-                <th>SoundSystem</th>
-                <th>Hand</th>
-                <th>SOP</th>
-                <th>Datasets</th>
+                <th>Type</th>
+                <th>Version</th>
+                <th>Files</th>
+                <th>Tests</th>
             </tr>
             </thead>
             <tbody class="container-table">
@@ -22,8 +19,7 @@
     </div>
 </div>
     <script>
-        console.log('hello');
-        axios.get('./api/containers').then((response) => {
+        axios.get('./containers').then((response) => {
             $.each(response.data, function(i, container){
                 $('.container-table').append(
                         '<tr>' +
@@ -50,7 +46,7 @@
                 );
 
                 $.each(container.datasets, function(i, dataset){
-                    $('.dropdown-container-' + container.id).append('<li><a href="./dataset/' + dataset.id + '">' + dataset.type + ' v' + dataset.version + '</a></li>');
+                    $('.dropdown-container-' + container.id).append('<li><a href="#">' + dataset.type + ' v' + dataset.version + '</a></li>');
                 });
 
             });
