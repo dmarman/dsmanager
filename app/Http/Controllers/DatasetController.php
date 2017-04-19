@@ -7,7 +7,7 @@ use App\Dataset;
 
 class DatasetController extends Controller
 {
-    public function all()
+    public function index()
     {
         $datasets = Dataset::with('files', 'tests', 'tests.checks', 'channels', 'channels.filters', 'channels.delay')->get();
 
@@ -16,14 +16,14 @@ class DatasetController extends Controller
 
     public function dataset(Dataset $dataset)
     {
-        $dataset->load('files', 'tests', 'tests.checks', 'channels', 'channels.filters', 'channels.delay');
+        $dataset->load('files', 'files.user', 'tests', 'tests.checks', 'tests.checks.user', 'channels', 'channels.filters', 'channels.delay');
 
         return $dataset;
     }
 
     public function showDataset (Dataset $dataset)
     {
-        $dataset->load('files', 'tests', 'tests.checks', 'channels', 'channels.filters', 'channels.delay');
+        $dataset->load('files', 'tests', 'tests.checks', 'tests.checks.user', 'channels', 'channels.filters', 'channels.delay');
 
         return view('dataset', compact(['dataset']));
     }

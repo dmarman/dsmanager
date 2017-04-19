@@ -3,13 +3,50 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h2>Dataset v{{ $dataset->version }}</h2>
-            <h2>Files</h2>
-            <h2>Filters</h2>
-                @foreach($dataset->channels as $channel)
-                    <h3>Channel {{ $channel->channel }}</h3>
-                @endforeach
-            <h2>Tests</h2>
+            <ul>
+                <li>Dataset v{{ $dataset->version }}</li>
+
+                <li>Files
+                    <ul>
+                        @foreach($dataset->files as $file)
+                            <li>{{ $file->client_name }} - <small>Uploaded by {{ $file->user->name }}</small></li>
+                        @endforeach
+                    </ul>
+                </li>
+
+                <li>Filters
+                    <ul>
+                        @foreach($dataset->channels as $channel)
+                        <li>Channel {{ $channel->channel }}
+                            <ul>
+                                @foreach($channel->filters as $filter)
+                                    <li>{{ $filter->type }}
+                                        <ul>
+                                            <li>{{ $filter->frequency }}Hz / {{ $filter->gain }}dB / Q: {{ $filter->q }}</li>
+                                        </ul>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                        @endforeach
+                    </ul>
+                </li>
+
+                <li>Tests
+                    <ul>
+                        @foreach($dataset->tests as $test)
+                        <li>{{ $test->type }}
+                            <ul>
+                            @foreach($test->checks as $check)
+                                <li>{{ $check->result }} / {{ $check->comment }} / <small>Tested by {{ $check->user['name'] }}</small></li>
+                            @endforeach
+                            </ul>
+                        </li>
+                        @endforeach
+                    </ul>
+                </li>
+
+            </ul>
         </div>
     </div>
     <script>
