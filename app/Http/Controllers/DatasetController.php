@@ -21,10 +21,10 @@ class DatasetController extends Controller
         return $dataset;
     }
 
-    public function showDataset (Dataset $dataset)
+    public function show(Dataset $dataset)
     {
         $dataset->load('files', 'tests', 'tests.checks', 'tests.checks.user', 'channels', 'channels.filters', 'channels.delay');
 
-        return view('dataset', compact(['dataset']));
+        return view('dataset.show', compact(['dataset']));
     }
 }

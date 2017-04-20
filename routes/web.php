@@ -8,4 +8,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/dataset/{dataset}', 'DatasetController@showDataset');
+Route::get('/dataset/{dataset}', 'DatasetController@show');
