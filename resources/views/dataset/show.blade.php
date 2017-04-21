@@ -4,8 +4,13 @@
     <div class="container">
         <div class="row">
 
-            <h2 class="text-capitalize">{{ $dataset->type }} Dataset v{{ $dataset->version }}</h2>
-            <p>{{ $dataset->container->description->car }}</p>
+            <h2 class="text-capitalize">{{ $dataset->type }} Dataset v{{ $dataset->version }}   <span class="label label-danger">SOP</span></h2>
+            <span>{{ $dataset->container->description->car->name }}</span>
+            <span>{{ $dataset->container->description->body->name }}</span>
+            <span>{{ $dataset->container->description->hand->name }} Hand</span> /
+            <span>{{ $dataset->container->description->radio->name }} MIB{{ $dataset->container->description->radio->mib }}</span>
+            <span>{{ $dataset->container->description->soundsystem->name }}</span> /
+            <span>{{ $dataset->container->description->amplifier->communication }} {{ $dataset->container->description->amplifier->channels }} Amplifier</span>
             <h3>Files</h3>
             <ul>
                 @foreach($dataset->files as $file)
