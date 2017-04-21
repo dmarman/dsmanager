@@ -12,7 +12,7 @@ class Dataset extends Model
 
     public function container()
     {
-        return $this->hasOne('App\Container');
+        return $this->belongsTo('App\Container');
     }
 
     public function files(){
@@ -26,4 +26,8 @@ class Dataset extends Model
     public function channels(){
         return $this->hasMany('App\Channel');
     }
+
+//    public function container(){
+//        return $this->belongsTo('App\Container');
+//    }
 }
