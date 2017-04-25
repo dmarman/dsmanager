@@ -29,14 +29,11 @@
                     @endforeach
                     </tr>
                 </thead>
-
                 <tbody>
                     @foreach($channel->filters as $filter)
                         <tr>
                             @foreach($dataset->channels as $channel)
                             <td>
-
-
                                 <p>{{ $filter->type }}</p>
                                 <p>{{ $filter->frequency }}Hz / {{ $filter->gain }}dB / Q: {{ $filter->q }}</p>
                             </td>
