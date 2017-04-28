@@ -16,8 +16,8 @@ class DatasetController extends Controller
 
     public function dataset(Dataset $dataset)
     {
-        $dataset->load('container', 'container.description', 'container.description.car', 'container.description.body',
-            'container.description.radio', 'container.description.soundsystem', 'description.hand', 'description.amplifier',
+        $dataset->load('container', 'container', 'container.car', 'container.body',
+            'container.radio', 'container.soundsystem', 'hand', 'amplifier',
             'files', 'files.user', 'tests', 'tests.checks', 'tests.checks.user', 'channels', 'channels.filters', 'channels.delay');
 
         return $dataset;
@@ -27,6 +27,6 @@ class DatasetController extends Controller
     {
         $dataset->load('files', 'files.user', 'tests', 'tests.checks', 'tests.checks.user', 'channels', 'channels.filters', 'channels.delay');
 
-        return view('dataset.show', compact(['dataset']));
+        return view('container.dataset.show', compact(['dataset']));
     }
 }

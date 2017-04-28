@@ -22,18 +22,17 @@
         </div>
     </div>
     <script>
-        console.log('hello');
         axios.get('./api/containers').then((response) => {
             $.each(response.data, function(i, container){
                 $('.container-table').append(
                     '<tr>' +
                     '<td>' + container.id + '</td>' +
-                    '<td>' + container.description.car.name + '</td>' +
-                    '<td>' + container.description.body.name + '</td>' +
-                    '<td>' + container.description.radio.name + '</td>' +
-                    '<td>' + container.description.soundsystem.name + '</td>' +
-                    '<td>' + container.description.hand.name + '</td>' +
-                    '<td>' + container.description.week + '/' + String(container.description.year).slice(2, 4) + '</td>' +
+                    '<td>' + container.car.name + '</td>' +
+                    '<td>' + container.body.name + '</td>' +
+                    '<td>' + container.radio.name + '</td>' +
+                    '<td>' + container.soundsystem.name + '</td>' +
+                    '<td>' + container.hand.name + '</td>' +
+                    '<td>' + container.week + '/' + String(container.year).slice(2, 4) + '</td>' +
                     '<td>' +
                     '<div class="dropdown">' +
                         '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">'

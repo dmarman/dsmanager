@@ -27,8 +27,4 @@ class HomeController extends Controller
         return view('container.index');
     }
 
-    public function indexVue()
-    {
-        return view('vueHome');
-    }
 }

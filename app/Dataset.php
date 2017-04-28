@@ -27,7 +27,4 @@ class Dataset extends Model
         return $this->hasMany('App\Channel');
     }
 
-//    public function container(){
-//        return $this->belongsTo('App\Container');
-//    }
 }

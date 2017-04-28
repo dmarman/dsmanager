@@ -9,8 +9,8 @@ class ContainerController extends Controller
 {
     public function index()
     {
-        $container = Container::with('description.car', 'description.body', 'description.radio', 'description.soundsystem',
-                                'description.hand', 'description.amplifier', 'datasets.files', 'datasets.tests', 'datasets.tests.checks',
+        $container = Container::with('car', 'body', 'radio', 'soundsystem',
+                                'hand', 'amplifier', 'datasets.files', 'datasets.tests', 'datasets.tests.checks',
                                 'datasets.channels', 'datasets.channels.filters', 'datasets.channels.delay')->get();
 
         return $container;
@@ -19,5 +19,11 @@ class ContainerController extends Controller
     public function container(Container $container)
     {
         return $container;
+    }
+
+    public function create()
+    {
+
+        return view('container.create');
     }
 }

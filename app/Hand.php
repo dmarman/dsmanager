@@ -10,8 +10,8 @@ class Hand extends Model
         'updated_at', 'created_at', 'deleted_at'
     ];
 
-    public function containerDescription()
+    public function container()
     {
-        return $this->hasMany('App\ContainerDescription');
+        return $this->hasMany('App\Container');
     }
 }

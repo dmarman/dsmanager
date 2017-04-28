@@ -5,12 +5,12 @@
         <div class="row">
 
             <h2 class="text-capitalize">{{ $dataset->type }} Dataset v{{ $dataset->version }}   <span class="label label-danger">SOP</span></h2>
-            <span>{{ $dataset->container->description->car->name }}</span>
-            <span>{{ $dataset->container->description->body->name }}</span>
-            <span>{{ $dataset->container->description->hand->name }} Hand</span> /
-            <span>{{ $dataset->container->description->radio->name }} MIB{{ $dataset->container->description->radio->mib }}</span>
-            <span>{{ $dataset->container->description->soundsystem->name }}</span> /
-            <span>{{ $dataset->container->description->amplifier->communication }} {{ $dataset->container->description->amplifier->channels }} Amplifier</span>
+            <span>{{ $dataset->container->car->name }}</span>
+            <span>{{ $dataset->container->body->name }}</span>
+            <span>{{ $dataset->container->hand->name }} Hand</span> /
+            <span>{{ $dataset->container->radio->name }} MIB{{ $dataset->container->radio->mib }}</span>
+            <span>{{ $dataset->container->soundsystem->name }}</span> /
+            <span>{{ $dataset->container->amplifier->communication }} {{ $dataset->container->amplifier->channels }} Amplifier</span>
             <h3>Files</h3>
             <ul>
                 @foreach($dataset->files as $file)
@@ -21,24 +21,27 @@
 
             @if($dataset->channels->count() > 0)
             <h3>Filters</h3>
-            <table class="table">
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                    @foreach($dataset->channels as $channel)
-                        <th>Channel {{ $channel->channel }}</th>
-                    @endforeach
+                        <th></th>
+                        @for($i = 1; $i < 7; $i++)
+                            <th class="text-center">Filter {{ $i }}</th>
+                        @endfor
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($channel->filters as $filter)
+                    @foreach($dataset->channels as $channel)
                         <tr>
-                            @foreach($dataset->channels as $channel)
                             <td>
+                                <p><strong>Channel {{ $channel->channel }}</strong></p>
+                            </td>
+                            @foreach($channel->filters as $filter)
+                            <td class="text-center">
                                 <p>{{ $filter->type }}</p>
-                                <p>{{ $filter->frequency }}Hz / {{ $filter->gain }}dB / Q: {{ $filter->q }}</p>
+                                <p><small>{{ $filter->frequency }}Hz / {{ $filter->gain }}dB / Q: {{ $filter->q }}</small></p>
                             </td>
                             @endforeach
-
                         </tr>
                     @endforeach
                 </tbody>

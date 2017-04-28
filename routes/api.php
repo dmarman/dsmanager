@@ -1,7 +1,5 @@
 <?php
 
-Route::get('/container/descriptions', 'ContainerDescriptionController@descriptions');
-
 Route::get('/containers', 'ContainerController@index');
 
 Route::get('/container/{container}', 'ContainerController@container');
