@@ -16,7 +16,7 @@ class Container extends Model
     public function car()
     {
         return $this->belongsTo('App\Car');
-    }
+    } 
 
     public function body()
     {
