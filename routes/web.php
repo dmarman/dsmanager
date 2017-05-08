@@ -6,8 +6,20 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-
-Route::get('/dataset/{dataset}', 'DatasetController@show');
+Route::get('/home', 'ContainerController@index');
 
 Route::get('/containers/create', 'ContainerController@create');
+
+Route::post('/containers/store', 'ContainerController@store');
+
+Route::get('/containers/{container}', 'ContainerController@show');
+
+Route::get('/containers', 'ContainerController@index');
+
+Route::get('/datasets/create', 'DatasetController@create');
+
+Route::post('/datasets/store', 'DatasetController@store');
+
+Route::get('/datasets/{dataset}', 'DatasetController@show');
+
+Route::get('/datasets', 'DatasetController@index');

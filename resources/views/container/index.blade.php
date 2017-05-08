@@ -1,58 +1,67 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
+    <section class="section">
+        <div class="container">
             <table class="table">
                 <thead>
-                <tr>
-                    <th>#ID</th>
-                    <th>Car</th>
-                    <th>Body</th>
-                    <th>Radio</th>
-                    <th>SoundSystem</th>
-                    <th>Hand</th>
-                    <th>SOP</th>
-                    <th>Datasets</th>
-                </tr>
+                    <tr>
+                        <th>#ID</th>
+                        <th>Car</th>
+                        <th>Body</th>
+                        <th>Radio</th>
+                        <th>SoundSystem</th>
+                        <th>Hand</th>
+                        <th>SOP</th>
+                        <th>Audio</th>
+                        <th>Phone</th>
+                    </tr>
                 </thead>
-                <tbody class="container-table">
+                <tfoot>
+                    <tr>
+                        <th>#ID</th>
+                        <th>Car</th>
+                        <th>Body</th>
+                        <th>Radio</th>
+                        <th>SoundSystem</th>
+                        <th>Hand</th>
+                        <th>SOP</th>
+                        <th>Audio</th>
+                        <th>Phone</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach($containers as $container)
+                        <tr>
+                            <th><a href="{{ url('/containers/' . $container->id) }}">{{ $container->id }}</a></th>
+                            <td>{{ $container->car->name }}</td>
+                            <td>{{ $container->body->name }}</td>
+                            <td>{{ $container->radio->name }}</td>
+                            <td>{{ $container->soundsystem->name }}</td>
+                            <td>{{ $container->hand->name }}</td>
+                            <td>{{ $container->week }}/{{ $container->year }}</td>
+                            <td>
+                                @if($container->datasets->count() > 0 )
+                                    @foreach($container->datasets as $dataset)
+                                        @if($dataset->type == "sound")
+                                            <a href="{{ url('/datasets/' . $dataset->id) }}">v{{ $dataset->version }}</a>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </td>
+                            <td>
+                                @if($container->datasets->count() > 0 )
+                                    @foreach($container->datasets as $dataset)
+                                        @if($dataset->type == "phone")
+                                            <a href="{{ url('/datasets/' . $dataset->id) }}">v{{ $dataset->version }}</a>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
-    </div>
-    <script>
-        axios.get('./api/containers').then((response) => {
-            $.each(response.data, function(i, container){
-                $('.container-table').append(
-                    '<tr>' +
-                    '<td>' + container.id + '</td>' +
-                    '<td>' + container.car.name + '</td>' +
-                    '<td>' + container.body.name + '</td>' +
-                    '<td>' + container.radio.name + '</td>' +
-                    '<td>' + container.soundsystem.name + '</td>' +
-                    '<td>' + container.hand.name + '</td>' +
-                    '<td>' + container.week + '/' + String(container.year).slice(2, 4) + '</td>' +
-                    '<td>' +
-                    '<div class="dropdown">' +
-                        '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">'
-                            + container.datasets.length +
-                            ' <span class="caret"></span>' +
-                        '</button>' +
-                        '<ul class="dropdown-menu dropdown-container-' + container.id + '" aria-labelledby="dropdownMenu1">' +
-                        '<li><a>View all</a></li>' +
-                        '<li role="separator" class="divider"></li>' +
-                        '</ul>' +
-                    '</div>' +
-                    '</td>' +
-                    '</tr>'
-                );
-
-                $.each(container.datasets, function(i, dataset){
-                    $('.dropdown-container-' + container.id).append('<li><a href="./dataset/' + dataset.id + '">' + dataset.type + ' v' + dataset.version + '</a></li>');
-                });
-
-            });
-        });
-    </script>
+    </section>
 @endsection

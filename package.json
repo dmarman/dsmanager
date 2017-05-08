@@ -20,6 +20,6 @@
     "vuetable-2": "^1.2.0"
   },
   "dependencies": {
-
+    "bulma": "^0.4.1"
   }
 }
