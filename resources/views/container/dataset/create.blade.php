@@ -12,7 +12,7 @@
                 <h2 class="title">Add {{ $type }} Dataset v{{ $version }}</h2>
                     <div class="columns">
                         <div class="column">
-                            <form action="{{ url('file') }}" class="dropzone" id="my-awesome-dropzone" style="padding: 150px 20px;">
+                            <form action="{{ url('/files/upload') }}" class="dropzone" id="my-awesome-dropzone" style="padding: 150px 20px;">
                                 {{ csrf_field() }}
                             </form>
                         </div>
@@ -50,28 +50,15 @@
     <script>
         window.onload = function(){
 
-//            $('.save-btn').click(function(){
-//                $('.dataset-form').submit();
-//
-//            });
-
             Dropzone.options.myAwesomeDropzone = {
                 maxFilesize: 50, // MB
-                uploadMultiple: true,
-                autoProcessQueue: false,
-                //acceptedFiles: '.xml',
+                parallelUploads: 1,
 
                 init: function() {
-                    console.log('hello');
+                    console.log('init');
                 },
                 success: function(file, response, action) {
-                    if (response.success) {
-                        this.defaultOptions.success(file);
-                        //TODO cannot put feedback
-                    } else {
-                        this.defaultOptions.error(file, response.errorMessage);
-
-                    }
+                   console.log('test');
                 }
             };
 

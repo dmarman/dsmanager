@@ -8,6 +8,8 @@ Auth::routes();
 
 Route::get('/home', 'ContainerController@index');
 
+Route::post('/files/upload', 'FileController@upload');
+
 Route::get('/containers/create', 'ContainerController@create');
 
 Route::post('/containers/store', 'ContainerController@store');
