@@ -18,8 +18,13 @@
                         </div>
 
                         <div class="column">
-                            <form class="dataset-form" action="{{ url('containers/store') }}" method="POST">
+                            <div class="message-container"></div>
+                            <form class="dataset-form" action="{{ url('datasets') }}" method="POST">
                                 {{ csrf_field() }}
+                                <input type="hidden" name="version" value="{{ $version }}">
+                                <input type="hidden" name="type" value="{{ $type }}">
+                                <input type="hidden" name="container" value="{{ $container->id }}">
+
                                 <h2 class="subtitle">Release</h2>
 
                                 <div class="field">
@@ -48,20 +53,29 @@
     </section>
 
     <script>
-        window.onload = function(){
+        Dropzone.options.myAwesomeDropzone = {
+            maxFilesize: 50, // MB
+            parallelUploads: 1,
+            addRemoveLinks: true,
 
-            Dropzone.options.myAwesomeDropzone = {
-                maxFilesize: 50, // MB
-                parallelUploads: 1,
+            init: function() {
+                //
+            },
+            success: function(file, response, action) {
+                if(response.status == 'ok'){
+                    $('.message-container').append(
+                            '<article class="message is-info">' +
+                                '<div class="message-header"><strong>' + response.file.type.toUpperCase() + '</strong> file added</div>' +
+                                '<div class="message-body">' + response.file.client_name + '</div>' +
+                            '</article>'
+                    );
 
-                init: function() {
-                    console.log('init');
-                },
-                success: function(file, response, action) {
-                   console.log('test');
+                    $('.dataset-form').append(
+                            '<input type="hidden" name="' + response.file.type + '" value="' + response.file.id + '">'
+                    );
                 }
-            };
 
+            }
         };
 
     </script>

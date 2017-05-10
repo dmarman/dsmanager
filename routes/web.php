@@ -20,8 +20,8 @@ Route::get('/containers', 'ContainerController@index');
 
 Route::get('/datasets/create', 'DatasetController@create');
 
-Route::post('/datasets/store', 'DatasetController@store');
+Route::post('/datasets', 'DatasetController@store');
 
 Route::get('/datasets/{dataset}', 'DatasetController@show');
 
-Route::get('/datasets', 'DatasetController@index');
+Route::post('/checks', 'CheckController@store');

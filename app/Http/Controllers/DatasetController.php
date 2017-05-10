@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Dataset;
 use App\Container;
+use App\File;
+use App\Test;
 
 class DatasetController extends Controller
 {
@@ -49,5 +51,57 @@ class DatasetController extends Controller
         }
 
         return view('container.dataset.create', compact(['container', 'type', 'version']));
+    }
+
+    public function store(Request $request)
+    {
+        $dataset = new Dataset();
+        $dataset->container_id = $request->input('container');
+        $dataset->version = $request->input('version');
+        $dataset->week_release = $request->input('week');
+        $dataset->year_release = $request->input('year');
+        $dataset->type = $request->input('type');
+        $dataset->save();
+
+        $audioTest = new Test();
+        $audioTest->dataset_id = $dataset->id;
+        $audioTest->type = 'sound';
+        $audioTest->save();
+
+        $benchTest = new Test();
+        $benchTest->dataset_id = $dataset->id;
+        $benchTest->type = 'bench';
+        $benchTest->save();
+
+        $comments = new Test();
+        $comments->dataset_id = $dataset->id;
+        $comments->type = 'comments';
+        $comments->save();
+
+        if($request->input('dsm')){
+            $file = File::findOrFail($request->input('dsm'));
+            $file->dataset_id = $dataset->id;
+            $file->save();
+        }
+        if($request->input('prg')){
+            $file = File::findOrFail($request->input('prg'));
+            $file->dataset_id = $dataset->id;
+            $file->save();
+        }
+        if($request->input('vas')){
+            $file = File::findOrFail($request->input('vas'));
+            $file->dataset_id = $dataset->id;
+            $file->save();
+        }
+        if($request->input('dspproj')){
+            $file = File::findOrFail($request->input('dspproj'));
+            $file->dataset_id = $dataset->id;
+            $file->save();
+        }
+
+        return redirect()->action(
+            'DatasetController@show', ['dataset' => $dataset]
+        );
+
     }
 }

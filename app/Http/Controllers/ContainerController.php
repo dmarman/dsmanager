@@ -58,6 +58,4 @@ class ContainerController extends Controller
 
         return 'hello';
     }
-
-
 }

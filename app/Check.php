@@ -10,11 +10,13 @@ class Check extends Model
         'test_id', 'updated_at', 'deleted_at'
     ];
 
-    public function test() {
-        return $this->hasOne('App\Test');
+    public function test()
+    {
+        return $this->belongsTo('App\Test');
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\User');
     }
 }
