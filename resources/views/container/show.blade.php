@@ -25,38 +25,51 @@
             </div>
         </div>
     </section>
+    <section>
+        @if(isset($image))
+            <div class="container">
+                <img src="{{ $image->link }}" style="display: block; margin: 0 auto;">
+            </div>
+        @endif
+    </section>
     <section class="section">
         <div class="container">
-            <h5 class="title">Audio
-                <a class="button is-info" href="{{ url('/datasets/create?container=' . $container->id . '&type=sound') }}">
-                    <span>New version</span>
-                </a>
-            </h5>
-            <hr>
-                @if($container->datasets->count() > 0 )
-                    @foreach($container->datasets as $dataset)
-                        @if($dataset->type == "sound")
-                            <a href="{{ url('/datasets/' . $dataset->id) }}">v{{ $dataset->version }}</a>
-                        @endif
-                    @endforeach
-                @endif
-            <br>
-            <br>
-            <br>
+            <div class="columns">
+                <div class="column">
+                    <h5 class="title">Audio
+                        <a class="button is-info" href="{{ url('/datasets/create?container=' . $container->id . '&type=sound') }}">
+                            <span>New version</span>
+                        </a>
+                    </h5>
+                    <hr>
+                    @if($container->datasets->count() > 0 )
+                        @foreach($container->datasets as $dataset)
+                            @if($dataset->type == "sound")
+                                <a href="{{ url('/datasets/' . $dataset->id) }}">v{{ $dataset->version }}</a>
+                            @endif
+                        @endforeach
+                    @endif
+                    <br>
+                    <br>
+                    <br>
+                </div>
 
-            <h5 class="title">Phone
-                <a class="button is-info" href="{{ url('/datasets/create?container=' . $container->id . '&type=phone') }}">
-                    <span>New version</span>
-                </a>
-            </h5>
-            <hr>
-                @if($container->datasets->count() > 0 )
-                    @foreach($container->datasets as $dataset)
-                        @if($dataset->type == "phone")
-                            <a href="{{ url('/datasets/' . $dataset->id) }}">v{{ $dataset->version }}</a>
-                        @endif
-                    @endforeach
-                @endif
+                <div class="column">
+                    <h5 class="title">Phone
+                        <a class="button is-info" href="{{ url('/datasets/create?container=' . $container->id . '&type=phone') }}">
+                            <span>New version</span>
+                        </a>
+                    </h5>
+                    <hr>
+                    @if($container->datasets->count() > 0 )
+                        @foreach($container->datasets as $dataset)
+                            @if($dataset->type == "phone")
+                                <a href="{{ url('/datasets/' . $dataset->id) }}">v{{ $dataset->version }}</a>
+                            @endif
+                        @endforeach
+                    @endif
+                </div>
+            </div>
         </div>
     </section>
 @endsection

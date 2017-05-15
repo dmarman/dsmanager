@@ -9,4 +9,23 @@
 //@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 // Bulma
+@import "node_modules/bulma/sass/utilities/initial-variables.sass";
+
+//$orange: #FF8200;
+//$warning: #FF8200;
+//$yellow:
+//$green: #00744B;
+//$turquois:
+//$blue: #72d0eb;
+//$purple:
+//$red: #C9282D;
+
+//$primary: $turquoise;
+////$info: $blue;
+//$success: $green;
+//$warning: $orange;
+//$danger: $red;
+//$light: $white-ter;
+//$dark: $grey-darker;
+
 @import "node_modules/bulma/bulma.sass";

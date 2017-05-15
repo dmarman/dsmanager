@@ -13,7 +13,9 @@
                     <span>{{ $dataset->container->hand->name }} Hand</span> /
                     <span>{{ $dataset->container->radio->name }} MIB{{ $dataset->container->radio->mib }}</span>
                     <span>{{ $dataset->container->soundsystem->name }}</span> /
-                    <span>{{ $dataset->container->amplifier->communication }} {{ $dataset->container->amplifier->channels }} Amplifier</span>
+                    @if(isset($dataset->container->amplifier))
+                        <span>{{ $dataset->container->amplifier->communication }} {{ $dataset->container->amplifier->channels }} Amplifier</span>
+                    @endif
                 </h2>
             </div>
         </div>
@@ -29,7 +31,10 @@
                         <div class="column has-text-centered">
                             <p>{{ $file->client_name }}</p>
                             <br>
-                            <a class="button is-primary">Download {{ strtoupper($file->type) }}</a>
+                            @if($file->type == "dsm")
+                                <a class="button is-outlined" href="{{ url('/dsm/' . $file->id) }}">View</a>
+                            @endif
+                            <a class="button is-primary" href="{{ url('/files/' . $file->id . '/download') }}">Download {{ strtoupper($file->type) }}</a>
                         </div>
                     @endforeach
                 @else
@@ -56,7 +61,8 @@
                     @foreach($dataset->channels as $channel)
                         <tr>
                             <th>
-                                Channel {{ $channel->channel }}
+                                <p>Channel {{ $channel->channel }}</p>
+                                <p><small>{{ $channel->gain }}dB {{ $channel->delay }}ms</small></p>
                             </th>
                             @foreach($channel->filters as $filter)
                                 <td>

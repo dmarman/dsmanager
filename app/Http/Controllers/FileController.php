@@ -63,4 +63,11 @@ class FileController extends Controller
             'error' => $request->file('file')->getError()
         ]);
     }
+
+    public function download(File $file)
+    {
+        $path = storage_path('app/' . $file->path);
+
+        return response()->download($path, $file->client_name);
+    }
 }

@@ -10,6 +10,7 @@ use App\Car;
 use App\Radio;
 use App\Soundsystem;
 use App\Hand;
+use App\Image;
 
 class ContainerController extends Controller
 {
@@ -28,7 +29,9 @@ class ContainerController extends Controller
             'hand', 'amplifier', 'datasets.files', 'datasets.tests', 'datasets.tests.checks',
             'datasets.channels', 'datasets.channels.filters', 'datasets.channels.delay');
 
-        return view('container.show', compact('container'));
+        $image = Image::where('car_id', $container->car->id)->where('body_id', $container->body->id)->first();
+
+        return view('container.show', compact('container', 'image'));
     }
 
     public function create()
@@ -56,6 +59,8 @@ class ContainerController extends Controller
         $container->amplifier_id = $request->input('amplifier');
         $container->save();
 
-        return 'hello';
+        return redirect()->action(
+            'ContainerController@show', ['container' => $container]
+        );
     }
 }

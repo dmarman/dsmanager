@@ -2,7 +2,7 @@
 
 Route::get('/containers', 'ContainerController@index');
 
-Route::get('/container/{container}', 'ContainerController@container');
+Route::get('/container/{container}', 'DatasetController@dataset');
 
 Route::get('/dataset/{dataset}', 'DatasetController@dataset');
 
