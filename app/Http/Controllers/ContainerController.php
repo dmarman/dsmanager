@@ -20,6 +20,10 @@ class ContainerController extends Controller
                                 'hand', 'amplifier', 'datasets.files', 'datasets.tests', 'datasets.tests.checks',
                                 'datasets.channels', 'datasets.channels.filters', 'datasets.channels.delay')->get();
 
+
+
+        //return $containers;
+
         return view('container.index', compact('containers'));
     }
 

@@ -11,6 +11,13 @@ class FileController extends Controller
     public function upload(Request $request)
     {
         if ($request->hasFile('file') && $request->file('file')->isValid()){
+
+            $dataset_id = null;
+
+            if($request->input('dataset')){
+                $dataset_id = $request->input('dataset');
+            }
+
             $fileUploaded = $request->file('file');
 
             $clientExtension = $fileUploaded->getClientOriginalExtension();
@@ -41,7 +48,7 @@ class FileController extends Controller
             $file = new File();
 
             $file->user_id       = Auth::user()->id;
-            $file->dataset_id    = null;
+            $file->dataset_id    = $dataset_id;
             $file->client_name   = $fileUploaded->getClientOriginalName();
             $file->name          = $name;
             $file->type          = $type;
@@ -69,5 +76,12 @@ class FileController extends Controller
         $path = storage_path('app/' . $file->path);
 
         return response()->download($path, $file->client_name);
+    }
+
+    public function destroy(File $file)
+    {
+        $file->delete();
+
+        return 'ok';
     }
 }

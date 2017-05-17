@@ -4,19 +4,27 @@
     <section class="hero is-warning">
         <div class="hero-body">
             <div class="container">
-                <h1 class="title">
-                    {{ ucfirst($dataset->type) }} Dataset v{{ $dataset->version }}
-                </h1>
-                <h2 class="subtitle">
-                    <span>{{ $dataset->container->car->name }}</span>
-                    <span>{{ $dataset->container->body->name }}</span>
-                    <span>{{ $dataset->container->hand->name }} Hand</span> /
-                    <span>{{ $dataset->container->radio->name }} MIB{{ $dataset->container->radio->mib }}</span>
-                    <span>{{ $dataset->container->soundsystem->name }}</span> /
-                    @if(isset($dataset->container->amplifier))
-                        <span>{{ $dataset->container->amplifier->communication }} {{ $dataset->container->amplifier->channels }} Amplifier</span>
-                    @endif
-                </h2>
+                <div class="columns">
+                    <div class="column">
+                        <h1 class="title">
+                            {{ ucfirst($dataset->type) }} Dataset v{{ $dataset->version }}
+                        </h1>
+                        <h2 class="subtitle">
+                            <span>{{ $dataset->container->car->name }}</span>
+                            <span>{{ $dataset->container->body->name }}</span>
+                            <span>{{ $dataset->container->hand->name }} Hand</span> /
+                            <span>{{ $dataset->container->radio->name }} MIB{{ $dataset->container->radio->mib }}</span>
+                            <span>{{ $dataset->container->soundsystem->name }}</span> /
+                            @if(isset($dataset->container->amplifier))
+                                <span>{{ $dataset->container->amplifier->communication }} {{ $dataset->container->amplifier->channels }} Amplifier</span>
+                            @endif
+                        </h2>
+                    </div>
+                    <div class="column has-text-right">
+                        <a class="button is-primary is-outlined is-inverted" href="{{ url('/datasets/' . $dataset->id . '/edit') }}">Edit</a>
+                    </div>
+
+                </div>
             </div>
         </div>
     </section>
@@ -26,20 +34,16 @@
             <h3 class="title">Files</h3>
 
             <div class="columns">
-                @if($dataset->files->count() > 0)
-                    @foreach($dataset->files as $file)
-                        <div class="column has-text-centered">
-                            <p>{{ $file->client_name }}</p>
-                            <br>
-                            @if($file->type == "dsm")
-                                <a class="button is-outlined" href="{{ url('/dsm/' . $file->id) }}">View</a>
-                            @endif
-                            <a class="button is-primary" href="{{ url('/files/' . $file->id . '/download') }}">Download {{ strtoupper($file->type) }}</a>
-                        </div>
-                    @endforeach
-                @else
-                    <a class="button is-primary">Add files</a>
-                @endif
+                @foreach($dataset->files as $file)
+                    <div class="column has-text-centered">
+                        <p>{{ $file->client_name }}</p>
+                        <br>
+                        @if($file->type == "dsm")
+                            <a class="button is-outlined" href="{{ url('/dsm/' . $file->id) }}">View</a>
+                        @endif
+                        <a class="button is-primary" href="{{ url('/files/' . $file->id . '/download') }}">Download {{ strtoupper($file->type) }}</a>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>

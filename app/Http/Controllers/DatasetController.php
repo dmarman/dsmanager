@@ -33,6 +33,14 @@ class DatasetController extends Controller
         return view('container.dataset.show', compact(['dataset']));
     }
 
+    public function edit(Dataset $dataset)
+    {
+        $dataset->load('files', 'files.user', 'tests', 'tests.checks', 'tests.checks.user', 'channels', 'channels.filters', 'channels.delay');
+
+        return view('container.dataset.edit', compact(['dataset']));
+    }
+
+
     public function create(Request $request)
     {
         $type = $request->input('type');
