@@ -32,6 +32,7 @@
                         {{ config('app.name', 'Laravel') }}
                     </a>
                     <a class="nav-item is-tab is-hidden-mobile" href="{{ url('/containers') }}">Containers</a>
+                    <a class="nav-item is-tab is-hidden-mobile" href="{{ url('/cars') }}">Cars</a>
                 </div>
                 <span class="nav-toggle">
                     <span></span>

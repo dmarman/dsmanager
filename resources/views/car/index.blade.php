@@ -23,9 +23,8 @@
                             <td>{{ $car->brand }}</td>
                             <td>{{ $car->week_release }}</td>
                             <td>{{ $car->name }}</td>                            
-                            <td>{{ $car->container->count() }}</td>                            
-                        
-                            
+                            <td><a href="{{ url('/cars/' . $car->id . '/containers') }}">{{ $car->container->count() }}</a></td>                            
+                                              
                         </tr>
                     @endforeach
                 </tbody>

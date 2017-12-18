@@ -7,7 +7,7 @@
                 <div class="columns">
                     <div class="column">
                         <h1 class="title">
-                            {{ ucfirst($dataset->type) }} Dataset v{{ $dataset->version }}
+                            {{ ucfirst($dataset->type) }} Dataset v{{ $dataset->version }} - {{ ucfirst($dataset->status) }} Tuning 
                         </h1>
                         <a href="{{ url('/containers/' . $dataset->container->id) }}">
                             <h2 class="subtitle">

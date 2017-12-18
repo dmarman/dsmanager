@@ -48,7 +48,7 @@
                     @foreach($containers as $container)
                         <tr>
                             <th><a href="{{ url('/containers/' . $container->id) }}">{{ $container->id }}</a></th>
-                            <td>{{ $container->car->name }}</td>
+                            <td><a href="{{ url('/cars/' . $container->car->id . '/containers') }}">{{ $container->car->name }}</a></td>
                             <td>{{ $container->radio->name }}</td>
                             <td>{{ $container->soundsystem->name }}</td>
                             <td>{{ $container->hand->name }}</td>

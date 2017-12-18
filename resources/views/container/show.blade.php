@@ -39,6 +39,7 @@
                             <thead>
                                 <tr>
                                     <th>Version</th>
+                                    <th>Status</th>
                                     <th>Release</th>
                                     <th>Created</th>
                                     <th>Files</th>    
@@ -49,6 +50,7 @@
                                     @if($dataset->type == "sound")
                                         <tr>
                                             <td><a href="{{ url('/datasets/' . $dataset->id) }}">v{{ $dataset->version }}</a></td>    
+                                            <td>{{ ucfirst($dataset->status) }}</td>
                                             <td>{{ $dataset->week_release }}/{{ $dataset->year_release }}</td>
                                             <td>{{ $dataset->created_at->format('jS \\of F Y') }}</td>
                                             <td>{{ $dataset->files->count() }}</td>

@@ -17,6 +17,7 @@ class CreateDatasetsTable extends Migration
             $table->increments('id');
             $table->integer('container_id');
             $table->string('type');
+            $table->string('status');
             $table->integer('week_release')->nullable();
             $table->integer('year_release')->nullable();
             $table->string('version');
