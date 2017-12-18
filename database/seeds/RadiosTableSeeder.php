@@ -67,5 +67,13 @@ class RadiosTableSeeder extends Seeder
             'description' => '',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
+
+        DB::table('radios')->insert([
+            'pr' => 'I7Y',
+            'family' => 'PQ',
+            'name' => 'PQmin',
+            'description' => '',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
     }
 }

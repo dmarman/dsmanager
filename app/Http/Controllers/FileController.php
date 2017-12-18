@@ -35,6 +35,9 @@ class FileController extends Controller
             else if ($clientExtension == 'xml' && $prefix == 'prg'){
                 $type = 'prg';
             }
+            else if ($clientExtension == 'xml' && $prefix == 'dl_'){
+                $type = 'dl';
+            }
             else if ($clientExtension == 'dspproj'){
                 $type = 'dspproj';
             }

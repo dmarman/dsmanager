@@ -34,17 +34,30 @@
                                     <p>{{ $container->car->brand }}{{ $container->car->platform }}{{ $container->car->generation }}{{ $container->car->bodywork }} {{ $container->hand->name }} {{ $container->soundsystem->name }} {{ $container->radio->name }} {{ $container->amplifier->name }}<p>
                                     <div class="message-container"></div>                                                        
                                 </div>
-
                                 
-                                <h2 class="subtitle">Description</h2>
                                 <div class="field">
+                                    <label class="label">Description</label>
                                     <p class="control">
                                         <textarea class="textarea" placeholder="Description" name="description"></textarea>
                                     </p>
                                 </div>
-
-                                <h2 class="subtitle">Release</h2>
+                                
                                 <div class="field">
+                                    <label class="label">Status</label>
+                                    <div class="control">
+                                        <div class="select">
+                                            <select>
+                                                <option>Initial</option>
+                                                <option>Fine</option>
+                                                <option>Final</option>                                        
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                                <div class="field">
+                                    <label class="label">Release</label>                                
                                     <p class="control">
                                         <input name="week" class="input" type="text" placeholder="Week">
                                     </p>

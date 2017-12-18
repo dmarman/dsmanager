@@ -91,5 +91,13 @@ class AmplifiersTableSeeder extends Seeder
             'description' => '16 Channel Ethernet amplifier without CAN',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
+
+        DB::table('amplifiers')->insert([
+            'part_number' => '5k6.035.456',
+            'family' => 'CAN - LS',
+            'name' => 'CAN8',
+            'description' => '8 Channel Low Speed CAN amplifier',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
     }
 }
