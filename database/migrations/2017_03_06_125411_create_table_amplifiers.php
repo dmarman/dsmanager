@@ -15,8 +15,10 @@ class CreateTableAmplifiers extends Migration
     {
         Schema::create('amplifiers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('communication');
-            $table->integer('channels');
+            $table->string('part_number');
+            $table->string('family');
+            $table->string('name');
+            $table->string('description');                                    
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +31,6 @@ class CreateTableAmplifiers extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('amplifiers');
     }
 }

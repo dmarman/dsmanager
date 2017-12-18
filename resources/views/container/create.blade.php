@@ -21,33 +21,20 @@
                                             <select name="car">
                                                 <option value="0" disabled selected>Car</option>
                                                 @foreach($cars as $car)
-                                                    <option value="{{ $car->id }}">{{ $car->name }}</option>
+                                                    <option value="{{ $car->id }}">{{ $car->name }} - {{ $car->brand }}{{ $car->platform }}{{ $car->generation }}{{ $car->bodywork }}</option>
                                                 @endforeach
                                             </select>
                                         </span>
                                     </p>
                                 </div>
-
-                                <div class="field">
-                                    <p class="control">
-                                        <span class="select is-fullwidth">
-                                            <select name="body">
-                                                <option value="0" disabled selected>Body</option>
-                                                    @foreach($bodies as $body)
-                                                        <option value="{{ $body->id }}">{{ $body->name }}</option>
-                                                    @endforeach
-                                            </select>
-                                        </span>
-                                    </p>
-                                </div>
-
+                        
                                 <div class="field">
                                     <p class="control">
                                         <span class="select is-fullwidth">
                                             <select name="radio">
                                                 <option value="0" disabled selected>Radio</option>
                                                 @foreach($radios as $radio)
-                                                    <option value="{{ $radio->id }}">{{ $radio->name }}</option>
+                                                    <option value="{{ $radio->id }}">{{ $radio->name }} - {{ $radio->pr }}</option>
                                                 @endforeach
                                             </select>
                                         </span>
@@ -64,7 +51,7 @@
                                             <select name="soundsystem">
                                                 <option value="0" disabled selected>Soundsystem</option>
                                                 @foreach($soundsystems as $soundsystem)
-                                                    <option value="{{ $soundsystem->id }}">{{ $soundsystem->name }}</option>
+                                                    <option value="{{ $soundsystem->id }}">{{ $soundsystem->name }} - {{ $soundsystem->pr }}</option>
                                                 @endforeach
                                             </select>
                                         </span>
@@ -77,7 +64,7 @@
                                         <select name="hand">
                                             <option value="0" disabled selected>Hand</option>
                                             @foreach($hands as $hand)
-                                                <option value="{{ $hand->id }}">{{ $hand->name }}</option>
+                                                <option value="{{ $hand->id }}">{{ $hand->name }} - {{ $hand->pr }}</option>
                                             @endforeach
                                         </select>
                                         </span>
@@ -85,36 +72,19 @@
                                 </div>
 
                                 <div class="field">
-                                    <p class="control">
-                                        <label class="radio">
-                                            <input type="radio" name="amplifier" value="0" checked>
-                                            Internal amplifier
-                                        </label>
-                                        <label class="radio">
-                                            <input type="radio" name="amplifier" value="1">
-                                            External amplifier
-                                        </label>
-                                    </p>
-                                </div>
-
-                            </div>
-
-                            <div class="column">
-                                <h2 class="subtitle">SOP</h2>
-
-                                <div class="field">
-                                    <p class="control">
-                                        <input name="week" class="input" type="text" placeholder="Week">
+                                     <p class="control">
+                                        <span class="select is-fullwidth">
+                                        <select name="amplifier">
+                                            <option value="0" disabled selected>Amplifier</option>
+                                            @foreach($amplifiers as $amplifier)
+                                                <option value="{{ $amplifier->id }}">{{ $amplifier->name }} - {{ $amplifier->part_number }}</option>
+                                            @endforeach
+                                        </select>
+                                        </span>
                                     </p>
                                 </div>
 
                                 <div class="field">
-                                    <p class="control">
-                                        <input name="year" class="input" type="text" placeholder="Year">
-                                    </p>
-                                </div>
-
-                                <div class="field is-grouped">
                                     <p class="control">
                                         <button class="button is-primary">Submit</button>
                                     </p>

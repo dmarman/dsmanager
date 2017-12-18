@@ -15,9 +15,10 @@ class CreateRadioTable extends Migration
     {
         Schema::create('radios', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('mib');
-            $table->string('name');
             $table->string('pr');
+            $table->string('family');
+            $table->string('name');
+            $table->string('description');            
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +31,6 @@ class CreateRadioTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('radios');
     }
 }

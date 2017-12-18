@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\File;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
@@ -37,11 +38,14 @@ class FileController extends Controller
             else if ($clientExtension == 'dspproj'){
                 $type = 'dspproj';
             }
+            else if ($clientExtension == 'jpg' || $clientExtension == 'jpeg' || $clientExtension == 'png' || $clientExtension == 'gif'){
+                $type = 'image';
+            }
             else {
                 return 'Unacceptable file';
             }
-
-            $name = substr($fileUploaded->hashName(), 0, -3) . $clientExtension;
+            
+            $name = substr($fileUploaded->hashName(), 0, - strlen($fileUploaded->extension())) . $clientExtension;
 
             $path = $fileUploaded->storeAs($type, $name);
 
@@ -69,6 +73,19 @@ class FileController extends Controller
             'status' => 'fail',
             'error' => $request->file('file')->getError()
         ]);
+    }
+
+    public function image(File $file)
+    {
+        $path = storage_path($file->path);
+
+        $contents = Storage::get($file->path);
+        $type = Storage::mimeType($file->path);
+
+        $response = response()->make($contents, 200);
+        $response->header("Content-Type", $type);
+
+        return $response;
     }
 
     public function download(File $file)

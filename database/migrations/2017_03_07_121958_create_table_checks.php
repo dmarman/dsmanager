@@ -31,6 +31,6 @@ class CreateTableChecks extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('checks');
     }
 }

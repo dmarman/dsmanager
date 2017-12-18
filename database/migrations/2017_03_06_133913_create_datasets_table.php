@@ -17,9 +17,10 @@ class CreateDatasetsTable extends Migration
             $table->increments('id');
             $table->integer('container_id');
             $table->string('type');
-            $table->integer('week_release');
-            $table->integer('year_release');
+            $table->integer('week_release')->nullable();
+            $table->integer('year_release')->nullable();
             $table->string('version');
+            $table->string('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -32,6 +33,6 @@ class CreateDatasetsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('datasets');
     }
 }

@@ -7,12 +7,13 @@
     <section class="hero is-warning">
         <div class="hero-body">
             <div class="container">
-                <h1 class="title">
-                    {{ ucfirst($dataset->type) }} Dataset v{{ $dataset->version }}
-                </h1>
+                <a href="{{ url('/datasets/' . $dataset->id) }}">
+                    <h1 class="title">
+                        {{ ucfirst($dataset->type) }} Dataset v{{ $dataset->version }}
+                    </h1>
+                </a>
                 <h2 class="subtitle">
                     <span>{{ $dataset->container->car->name }}</span>
-                    <span>{{ $dataset->container->body->name }}</span>
                     <span>{{ $dataset->container->hand->name }} Hand</span> /
                     <span>{{ $dataset->container->radio->name }} MIB{{ $dataset->container->radio->mib }}</span>
                     <span>{{ $dataset->container->soundsystem->name }}</span> /
@@ -138,25 +139,30 @@
             success: function(file, response, action) {
                 if(response.status == 'ok'){
                     console.log(response);
+                    var dsmButton = '';
+
+                    if(response.file.type == 'dsm'){
+                        dsmButton = '<a class="button is-outlined" href="../../dsm/' + response.file.id + '">View</a>';
+                    }
+
                     $('.file-container').append(
-                        '<div class="column has-text-centered">' +
+                        '<div class="column has-text-centered file-' + response.file.id + '">' +
                             '<p>' + response.file.client_name + '</p>' +
                             '<br>' +
-                            
-                                '<a class="button is-outlined" href="../../dsm/' + response.file.client_name + '">View</a>' +
-                          
-                            '<a class="button is-primary" href="../../files/' + response + '/download">Download File type</a>' + 
-                            '<a class="button is-outlined">Delete</a>' +
+                            dsmButton +
+                            '<a class="button is-primary" href="../../files/' + response.file.id + '/download">Download ' + response.file.type.toUpperCase() + '</a>' + 
+                            '<a class="button is-outlined href="' + deleteFile(response.file.id) + '">Delete</a>' +
                         '</div>'
                     );
                 }
 
             }
         };
-
+/*
         function deleteFile(id){
             axios.delete('../../files/' + id);
             $('.file-' + id).remove();
         }
+  */
     </script>
 @endsection

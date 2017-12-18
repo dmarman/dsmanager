@@ -16,7 +16,7 @@ class CreateDelaysTable extends Migration
         Schema::create('delays', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('channel_id');
-            $table->decimal('delay', 2, 2);
+            $table->decimal('value', 2, 2);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ class CreateDelaysTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('delays');
     }
 }

@@ -8,25 +8,42 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-10 is-offset-1">
-
                 <h2 class="title">Add {{ $type }} Dataset v{{ $version }}</h2>
                     <div class="columns">
                         <div class="column">
                             <form action="{{ url('/files/upload') }}" class="dropzone" id="my-awesome-dropzone" style="padding: 150px 20px;">
                                 {{ csrf_field() }}
-                            </form>
+                            </form>                        
                         </div>
                         
                         <div class="column">
-                            <div class="message-container"></div>
                             <form class="dataset-form" action="{{ url('datasets') }}" method="POST">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="version" value="{{ $version }}">
                                 <input type="hidden" name="type" value="{{ $type }}">
                                 <input type="hidden" name="container" value="{{ $container->id }}">
+                                
+                                <div class="content">
+                                    <h2>Project</h2>
+                                    <p>
+                                        <span class="tag is-dark">+{{ $container->car->tma }}</span>
+                                        <span class="tag is-dark">+{{ $container->radio->pr }}</span>
+                                        <span class="tag is-dark">+{{ $container->soundsystem->pr }}</span>
+                                        <span class="tag is-dark">+{{ $container->hand->pr }}</span>   
+                                    </p>
+                                    <p>{{ $container->car->brand }}{{ $container->car->platform }}{{ $container->car->generation }}{{ $container->car->bodywork }} {{ $container->hand->name }} {{ $container->soundsystem->name }} {{ $container->radio->name }} {{ $container->amplifier->name }}<p>
+                                    <div class="message-container"></div>                                                        
+                                </div>
+
+                                
+                                <h2 class="subtitle">Description</h2>
+                                <div class="field">
+                                    <p class="control">
+                                        <textarea class="textarea" placeholder="Description" name="description"></textarea>
+                                    </p>
+                                </div>
 
                                 <h2 class="subtitle">Release</h2>
-
                                 <div class="field">
                                     <p class="control">
                                         <input name="week" class="input" type="text" placeholder="Week">

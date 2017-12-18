@@ -20,10 +20,6 @@ class ContainerController extends Controller
                                 'hand', 'amplifier', 'datasets.files', 'datasets.tests', 'datasets.tests.checks',
                                 'datasets.channels', 'datasets.channels.filters', 'datasets.channels.delay')->get();
 
-
-
-        //return $containers;
-
         return view('container.index', compact('containers'));
     }
 
@@ -33,9 +29,7 @@ class ContainerController extends Controller
             'hand', 'amplifier', 'datasets.files', 'datasets.tests', 'datasets.tests.checks',
             'datasets.channels', 'datasets.channels.filters', 'datasets.channels.delay');
 
-        $image = Image::where('car_id', $container->car->id)->where('body_id', $container->body->id)->first();
-
-        return view('container.show', compact('container', 'image'));
+        return view('container.show', compact('container'));
     }
 
     public function create()
@@ -54,12 +48,9 @@ class ContainerController extends Controller
     {
         $container = new Container();
         $container->car_id = $request->input('car');
-        $container->body_id = $request->input('body');
         $container->radio_id = $request->input('radio');
         $container->soundsystem_id = $request->input('soundsystem');
         $container->hand_id = $request->input('hand');
-        $container->week = $request->input('week');
-        $container->year = $request->input('year');
         $container->amplifier_id = $request->input('amplifier');
         $container->save();
 

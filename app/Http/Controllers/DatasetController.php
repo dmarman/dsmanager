@@ -68,6 +68,7 @@ class DatasetController extends Controller
         $dataset->version = $request->input('version');
         $dataset->week_release = $request->input('week');
         $dataset->year_release = $request->input('year');
+        $dataset->description = $request->input('description');
         $dataset->type = $request->input('type');
         $dataset->save();
 
@@ -106,6 +107,9 @@ class DatasetController extends Controller
             $file->dataset_id = $dataset->id;
             $file->save();
         }
+
+        // Update index container with new dataset
+        $dataset->container()->searchable();
 
         return redirect()->action(
             'DatasetController@show', ['dataset' => $dataset]

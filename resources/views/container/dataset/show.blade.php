@@ -9,16 +9,17 @@
                         <h1 class="title">
                             {{ ucfirst($dataset->type) }} Dataset v{{ $dataset->version }}
                         </h1>
-                        <h2 class="subtitle">
-                            <span>{{ $dataset->container->car->name }}</span>
-                            <span>{{ $dataset->container->body->name }}</span>
-                            <span>{{ $dataset->container->hand->name }} Hand</span> /
-                            <span>{{ $dataset->container->radio->name }} MIB{{ $dataset->container->radio->mib }}</span>
-                            <span>{{ $dataset->container->soundsystem->name }}</span> /
-                            @if(isset($dataset->container->amplifier))
-                                <span>{{ $dataset->container->amplifier->communication }} {{ $dataset->container->amplifier->channels }} Amplifier</span>
-                            @endif
-                        </h2>
+                        <a href="{{ url('/containers/' . $dataset->container->id) }}">
+                            <h2 class="subtitle">
+                                <span>{{ $dataset->container->car->name }}</span>
+                                <span>{{ $dataset->container->hand->name }}</span> /
+                                <span>{{ $dataset->container->radio->name }} {{ $dataset->container->radio->family }}</span>
+                                <span>{{ $dataset->container->soundsystem->name }}</span> /
+                                @if(isset($dataset->container->amplifier))
+                                    <span>{{ $dataset->container->amplifier->name }}</span>
+                                @endif
+                            </h2>
+                        </a>
                     </div>
                     <div class="column has-text-right">
                         <a class="button is-primary is-outlined is-inverted" href="{{ url('/datasets/' . $dataset->id . '/edit') }}">Edit</a>
@@ -35,58 +36,78 @@
 
             <div class="columns">
                 @foreach($dataset->files as $file)
-                    <div class="column has-text-centered">
-                        <p>{{ $file->client_name }}</p>
-                        <br>
-                        @if($file->type == "dsm")
-                            <a class="button is-outlined" href="{{ url('/dsm/' . $file->id) }}">View</a>
-                        @endif
-                        <a class="button is-primary" href="{{ url('/files/' . $file->id . '/download') }}">Download {{ strtoupper($file->type) }}</a>
-                    </div>
+                    @if($file->type != 'image')
+                        <div class="column has-text-centered">
+                            <p>{{ $file->client_name }}</p>
+                            <br>
+                            @if($file->type == "dsm")
+                                <a class="button is-outlined" href="{{ url('/dsm/' . $file->id) }}">View</a>
+                            @endif
+                            <a class="button is-primary" href="{{ url('/files/' . $file->id . '/download') }}">Download {{ strtoupper($file->type) }}</a>
+                        </div>
+                    @endif
                 @endforeach
             </div>
         </div>
     </section>
 
-    <section class="section">
-        <div class="container">
-            @if($dataset->channels->count() > 0)
-            <h3 class="title">Filters</h3>
-            <table class="table is-striped">
-                <thead>
-                    <tr>
-                        <th></th>
-                        @for($i = 1; $i < 7; $i++)
-                            <th>Filter {{ $i }}</th>
-                        @endfor
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($dataset->channels as $channel)
+    @if($dataset->channels->count() > 0)
+        <section class="section">
+            <div class="container">
+                
+                <h3 class="title">Filters</h3>
+                <table class="table is-striped">
+                    <thead>
                         <tr>
-                            <th>
-                                <p>Channel {{ $channel->channel }}</p>
-                                <p><small>{{ $channel->gain }}dB {{ $channel->delay }}ms</small></p>
-                            </th>
-                            @foreach($channel->filters as $filter)
-                                <td>
-                                    <p>{{ $filter->type }}</p>
-                                    <p><small>{{ $filter->frequency }}Hz / {{ $filter->gain }}dB / Q: {{ $filter->q }}</small></p>
-                                </td>
-                            @endforeach
+                            <th></th>
+                            @for($i = 1; $i < 7; $i++)
+                                <th>Filter {{ $i }}</th>
+                            @endfor
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            @endif
-        </div>
-    </section>
+                    </thead>
+                    <tbody>
+                        @foreach($dataset->channels as $channel)
+                            <tr>
+                                <th>
+                                    <p>Channel {{ $channel->channel }}</p>
+                                    <p><small>{{ $channel->gain }}dB {{ $channel->delay }}ms</small></p>
+                                </th>
+                                @foreach($channel->filters as $filter)
+                                    <td>
+                                        <p>{{ $filter->type }}</p>
+                                        <p><small>{{ $filter->frequency }}Hz / {{ $filter->gain }}dB / Q: {{ $filter->q }}</small></p>
+                                    </td>
+                                @endforeach
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                
+            </div>
+        </section>
+    @endif
 
     <section class="section">
         <div class="container">
-                <div class="block">
-                    <h3 class="title">Tests</h3><a class="button is-primary">Add test case</a>
-                </div>
+            <div class="block">
+                <h3 class="title">Description</h3>
+                <p>{{ $dataset->description }}</p>
+            </div>
+            <div class="block">
+                <h3 class="title">Tests</h3>
+            </div>
+            
+            <div class="columns">
+                @foreach($dataset->files as $file)
+                    @if($file->type == 'image')
+                        <div class="column">    
+                            <img class="image" src="{{ url('image/' . $file->id) }}">                        
+                        </div>    
+                    @endif
+                @endforeach
+            </div>
+            
+
             <div class="columns">
                 <div class="column is-half">
                     @foreach($dataset->tests as $test)

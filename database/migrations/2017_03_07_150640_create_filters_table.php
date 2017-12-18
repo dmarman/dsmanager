@@ -32,6 +32,6 @@ class CreateFiltersTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('filters');
     }
 }

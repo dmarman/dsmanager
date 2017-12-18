@@ -15,9 +15,10 @@ class CreateBodyTable extends Migration
     {
         Schema::create('bodies', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('identifier');
             $table->string('pr');
+            $table->string('bodywork_number');
+            $table->string('name');
+            $table->string('description');            
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +31,6 @@ class CreateBodyTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('bodies');
     }
 }

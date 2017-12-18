@@ -17,7 +17,7 @@ class CreateSoundsystemTable extends Migration
             $table->increments('id');
             $table->string('pr');
             $table->string('name');
-            $table->integer('speakers');
+            $table->string('description');            
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ class CreateSoundsystemTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('soundsystems');
     }
 }

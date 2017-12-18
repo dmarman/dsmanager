@@ -15,8 +15,9 @@ class CreateHandTable extends Migration
     {
         Schema::create('hands', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
             $table->string('pr');
+            $table->string('name');
+            $table->string('description');            
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +30,6 @@ class CreateHandTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('hands');
     }
 }
