@@ -41,6 +41,9 @@ class FileController extends Controller
             else if ($clientExtension == 'jpg' || $clientExtension == 'jpeg' || $clientExtension == 'png' || $clientExtension == 'gif'){
                 $type = 'image';
             }
+            else if($clientExtension == "pdf"){
+                $type = 'pdf';
+            }
             else {
                 return 'Unacceptable file';
             }
@@ -49,9 +52,11 @@ class FileController extends Controller
 
             $path = $fileUploaded->storeAs($type, $name);
 
+            $user = Auth::user();
+
             $file = new File();
 
-            $file->user_id       = Auth::user()->id;
+            $file->user_id       = $user->id;
             $file->dataset_id    = $dataset_id;
             $file->client_name   = $fileUploaded->getClientOriginalName();
             $file->name          = $name;
@@ -62,6 +67,8 @@ class FileController extends Controller
             $file->cloud_storage = 0;
 
             $file->save();
+
+            $file->user = $user;
 
             return response()->json([
                 'status' => 'ok',
@@ -99,6 +106,6 @@ class FileController extends Controller
     {
         $file->delete();
 
-        return 'ok';
+        return redirect('datasets/' . $file->dataset_id . '/edit');        
     }
 }

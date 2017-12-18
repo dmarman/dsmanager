@@ -8,6 +8,8 @@ Auth::routes();
 
 Route::get('/home', 'ContainerController@index');
 
+Route::get('/cars/{car}/container', 'CarController@index');
+
 Route::post('/files/upload', 'FileController@upload');
 Route::get('/files/{file}/download', 'FileController@download');
 Route::delete('/files/{file}', 'FileController@destroy');

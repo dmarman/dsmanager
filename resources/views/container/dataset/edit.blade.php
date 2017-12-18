@@ -35,18 +35,42 @@
 
             <br>
 
-            <div class="columns file-container">
-                @foreach($dataset->files as $file)
-                    <div class="column has-text-centered file-{{ $file->id}}">
-                        <p>{{ $file->client_name }}</p>
-                        <br>
-                        @if($file->type == "dsm")
-                            <a class="button is-outlined" href="{{ url('/dsm/' . $file->id) }}">View</a>
-                        @endif
-                        <a class="button is-primary" href="{{ url('/files/' . $file->id . '/download') }}">Download {{ strtoupper($file->type) }}</a>
-                        <a class="button is-outlined" onclick="deleteFile({{ $file->id }})">Delete</a>
-                    </div>
-                @endforeach
+            <div class="columns">
+                <div class="column">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>   
+                                <th>Name</th>
+                                <th>Size</th>
+                                <th>Uploaded on</th>
+                                <th>By</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                            @foreach($dataset->files as $file)
+                                @if($file->type != 'image')
+                                    <tr>
+                                        <th>{{ strtoupper($file->type) }}</th>                                        
+                                        <td>{{ $file->client_name }}</td>
+                                        <td>{{ round($file->size/1000) }} KB</td>
+                                        <td>{{ $file->created_at->format('jS \\of F Y') }}</td>
+                                        <td>{{ ucfirst($file->user->name) }}</td>
+                                        <td>
+                                            <form method="POST" action="{{ url('/files/' . $file->id) }}">
+                                                {{ csrf_field() }}
+                                                {{ method_field('delete') }}
+                                                <button type="submit">Delete</button>
+                                            </form>
+                                        </td>                                        
+                                    </tr>
+                                @endif        
+                            @endforeach 
+                        </tbody>
+                    </table>
+                </div>
+                           
             </div>
         </div>
     </section>
@@ -138,31 +162,25 @@
             },
             success: function(file, response, action) {
                 if(response.status == 'ok'){
-                    console.log(response);
-                    var dsmButton = '';
-
-                    if(response.file.type == 'dsm'){
-                        dsmButton = '<a class="button is-outlined" href="../../dsm/' + response.file.id + '">View</a>';
-                    }
-
-                    $('.file-container').append(
-                        '<div class="column has-text-centered file-' + response.file.id + '">' +
-                            '<p>' + response.file.client_name + '</p>' +
-                            '<br>' +
-                            dsmButton +
-                            '<a class="button is-primary" href="../../files/' + response.file.id + '/download">Download ' + response.file.type.toUpperCase() + '</a>' + 
-                            '<a class="button is-outlined href="' + deleteFile(response.file.id) + '">Delete</a>' +
-                        '</div>'
-                    );
+                    $('.table-body').append(
+                        '<tr>' + 
+                            '<th>' + response.file.type + '</th>' +
+                            '<td>' + response.file.client_name + '</td>' +
+                            '<td>' + response.file.size/1000 + '</td>' +
+                            '<td>' + response.file.created_at + '</td>' +
+                            '<td>' + response.file.user.name + '</td>' +
+                            '<td>' +
+                                '<form method="POST" action="../../files/' + response.file.id + '">' +
+                                    '<input name="_token" value="' + window.Laravel.csrfToken + '" type="hidden">' +
+                                    '<input name="_method" value="delete" type="hidden">' +
+                                    '<button type="submit">Delete</button>' +
+                                '</form>' +
+                            '</td>' +
+                        '</tr>'
+                        );
                 }
 
             }
-        };
-/*
-        function deleteFile(id){
-            axios.delete('../../files/' + id);
-            $('.file-' + id).remove();
-        }
-  */
+        };  
     </script>
 @endsection

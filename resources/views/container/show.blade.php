@@ -35,11 +35,28 @@
                     </h5>
                     <hr>
                     @if($container->datasets->count() > 0 )
-                        @foreach($container->datasets as $dataset)
-                            @if($dataset->type == "sound")
-                                <a href="{{ url('/datasets/' . $dataset->id) }}">v{{ $dataset->version }}</a>
-                            @endif
-                        @endforeach
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Version</th>
+                                    <th>Release</th>
+                                    <th>Created</th>
+                                    <th>Files</th>    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($container->datasets as $dataset)
+                                    @if($dataset->type == "sound")
+                                        <tr>
+                                            <td><a href="{{ url('/datasets/' . $dataset->id) }}">v{{ $dataset->version }}</a></td>    
+                                            <td>{{ $dataset->week_release }}/{{ $dataset->year_release }}</td>
+                                            <td>{{ $dataset->created_at->format('jS \\of F Y') }}</td>
+                                            <td>{{ $dataset->files->count() }}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
                     @endif
                     <br>
                     <br>

@@ -14,7 +14,14 @@ class File extends Model
         'dataset_id', 'deleted_at', 'user_id'
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo('App\User');
     }
+
+    public function dataset()
+    {
+        return $this->belongsTo('App\Dataset');
+    }
+
 }

@@ -35,24 +35,40 @@
             <h3 class="title">Files</h3>
 
             <div class="columns">
-                @foreach($dataset->files as $file)
-                    @if($file->type != 'image')
-                        <div class="column has-text-centered">
-                            <p>{{ $file->client_name }}</p>
-                            <br>
-                            @if($file->type == "dsm")
-                                <a class="button is-outlined" href="{{ url('/dsm/' . $file->id) }}">View</a>
-                            @endif
-                            <a class="button is-primary" href="{{ url('/files/' . $file->id . '/download') }}">Download {{ strtoupper($file->type) }}</a>
-                        </div>
-                    @endif
-                @endforeach
+                <div class="column">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>   
+                                <th>Name</th>
+                                <th>Size</th>
+                                <th>Uploaded on</th>
+                                <th>By</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                            <tbody>
+                                @foreach($dataset->files as $file)
+                                    @if($file->type != 'image')
+                                        <tr>
+                                            <th>{{ strtoupper($file->type) }}</th>                                        
+                                            <td>{{ $file->client_name }}</td>
+                                            <td>{{ round($file->size/1000) }} KB</td>
+                                            <td>{{ $file->created_at->format('jS \\of F Y') }}</td>
+                                            <td>{{ ucfirst($file->user->name) }}</td>
+                                            <td><a href="{{ url('/files/' . $file->id . '/download') }}">Download {{ strtoupper($file->type) }}</a></td>                                        
+                                        </tr>
+                                    @endif        
+                                @endforeach
+                            
+                        </tbody>
+                    </table>
+                </div>
+                           
             </div>
         </div>
-    </section>
 
-    @if($dataset->channels->count() > 0)
-        <section class="section">
+        @if($dataset->channels->count() > 0)
             <div class="container">
                 
                 <h3 class="title">Filters</h3>
@@ -84,10 +100,8 @@
                 </table>
                 
             </div>
-        </section>
-    @endif
+        @endif
 
-    <section class="section">
         <div class="container">
             <div class="block">
                 <h3 class="title">Description</h3>
@@ -169,8 +183,7 @@
             axios.post('./../checks', {
                 test: id,
                 comment: $('#test-' + id + '').val()
-            })
-            .then(function(response){
+            }).then(function(response){
                 $('.' + response.data.test.type + '-tests').append(
                     '<article class="media">' +
                         '<div class="media-left">' +
@@ -186,6 +199,7 @@
                     '</article>'
                 );
             });
+            $('#test-' + id + '').val('');
         }
     </script>
 @endsection
